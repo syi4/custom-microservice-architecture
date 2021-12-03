@@ -1,27 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const PostCreate = () => {
-  const [title, setTitle] = useState("");
+export const CommentCreate = ({ postId }) => {
+  const [content, setContent] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post("http://localhost:5000/posts", {
-      title,
+    await axios.post(`http://localhost:5001/posts/${postId}/comments`, {
+      content,
     });
 
-    setTitle("");
+    setContent("");
   };
 
   return (
     <div>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label>Title</label>
+          <label>New Comment</label>
           <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             className="form-control"
           />
         </div>
